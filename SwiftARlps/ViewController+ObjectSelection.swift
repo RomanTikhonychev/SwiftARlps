@@ -18,9 +18,15 @@ extension ViewController: ModelObjectSelectionViewControllerDelegate {
      */
     func placeVirtualObject(_ virtualObject: VirtualObject) {
         guard let cameraTransform = session.currentFrame?.camera.transform,
-            let focusSquarePosition = focusSquare.lastPosition else {
+            var focusSquarePosition = focusSquare.lastPosition else {
             statusViewController.showMessage("CANNOT PLACE OBJECT\nTry moving left or right.")
             return
+        }
+        
+        if let ball = virtualObject as? Ball {
+            focusSquarePosition.y += 0.3
+        } else {
+            focusSquarePosition.y -= 0.3
         }
         
         virtualObjectInteraction.selectedObject = virtualObject

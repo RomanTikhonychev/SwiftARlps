@@ -32,7 +32,16 @@ extension ViewController: UIGestureRecognizerDelegate {
 
     @IBAction func addCube() {
         guard !addCubeButton.isHidden else { return }
-        let cube = Cube()
+        let cube = Ball()
+        virtualObjectList.add(object: cube)
+        DispatchQueue.main.async {
+            self.placeVirtualObject(cube)
+        }
+    }
+    
+    @IBAction func addFloor() {
+        guard !addCubeButton.isHidden else { return }
+        let cube = Floor()
         virtualObjectList.add(object: cube)
         DispatchQueue.main.async {
             self.placeVirtualObject(cube)
